@@ -1,7 +1,7 @@
 #include "tiny_api.hpp"
 #include "tiny_api_constants.hpp"
 
-#include <iostream>
+// #include <iostream>
 
 #ifdef __cplusplus
 extern "C" {
@@ -10,13 +10,13 @@ extern "C" {
 using namespace Eigen;
 IOFormat TinyApiFmt(4, 0, ", ", "\n", "[", "]");
 
-static int check_dimension(std::string matrix_name, std::string rows_or_columns, int actual, int expected) {
-    if (actual != expected) {
-        // std::cout << matrix_name << " has " << actual << " " << rows_or_columns << ". Expected " << expected << "." << std::endl;
-        return 1;
-    }
-    return 0;
-}
+// static int check_dimension(std::string matrix_name, std::string rows_or_columns, int actual, int expected) {
+//     if (actual != expected) {
+//         // std::cout << matrix_name << " has " << actual << " " << rows_or_columns << ". Expected " << expected << "." << std::endl;
+//         return 1;
+//     }
+//     return 0;
+// }
 
 int tiny_setup(TinySolver** solverp,
                 tinyMatrix Adyn, tinyMatrix Bdyn, tinyMatrix Q, tinyMatrix R, 
@@ -53,22 +53,22 @@ int tiny_setup(TinySolver** solverp,
 
     // Make sure arguments are the correct shapes
     int status = 0;
-    status |= check_dimension("State transition matrix (A)", "rows", Adyn.rows(), nx);
-    status |= check_dimension("State transition matrix (A)", "columns", Adyn.cols(), nx);
-    status |= check_dimension("Input matrix (B)", "rows",  Bdyn.rows(), nx);
-    status |= check_dimension("Input matrix (B)", "columns",  Bdyn.cols(), nu);
-    status |= check_dimension("State stage cost (Q)", "rows",  Q.rows(), nx);
-    status |= check_dimension("State stage cost (Q)", "columns",  Q.cols(), nx);
-    status |= check_dimension("State input cost (R)", "rows",  R.rows(), nu);
-    status |= check_dimension("State input cost (R)", "columns",  R.cols(), nu);
-    status |= check_dimension("Lower state bounds (x_min)", "rows", x_min.rows(), nx);
-    status |= check_dimension("Lower state bounds (x_min)", "cols", x_min.cols(), N);
-    status |= check_dimension("Lower state bounds (x_max)", "rows", x_max.rows(), nx);
-    status |= check_dimension("Lower state bounds (x_max)", "cols", x_max.cols(), N);
-    status |= check_dimension("Lower input bounds (u_min)", "rows", u_min.rows(), nu);
-    status |= check_dimension("Lower input bounds (u_min)", "cols", u_min.cols(), N-1);
-    status |= check_dimension("Lower input bounds (u_max)", "rows", u_max.rows(), nu);
-    status |= check_dimension("Lower input bounds (u_max)", "cols", u_max.cols(), N-1);
+    // status |= check_dimension("State transition matrix (A)", "rows", Adyn.rows(), nx);
+    // status |= check_dimension("State transition matrix (A)", "columns", Adyn.cols(), nx);
+    // status |= check_dimension("Input matrix (B)", "rows",  Bdyn.rows(), nx);
+    // status |= check_dimension("Input matrix (B)", "columns",  Bdyn.cols(), nu);
+    // status |= check_dimension("State stage cost (Q)", "rows",  Q.rows(), nx);
+    // status |= check_dimension("State stage cost (Q)", "columns",  Q.cols(), nx);
+    // status |= check_dimension("State input cost (R)", "rows",  R.rows(), nu);
+    // status |= check_dimension("State input cost (R)", "columns",  R.cols(), nu);
+    // status |= check_dimension("Lower state bounds (x_min)", "rows", x_min.rows(), nx);
+    // status |= check_dimension("Lower state bounds (x_min)", "cols", x_min.cols(), N);
+    // status |= check_dimension("Lower state bounds (x_max)", "rows", x_max.rows(), nx);
+    // status |= check_dimension("Lower state bounds (x_max)", "cols", x_max.cols(), N);
+    // status |= check_dimension("Lower input bounds (u_min)", "rows", u_min.rows(), nu);
+    // status |= check_dimension("Lower input bounds (u_min)", "cols", u_min.cols(), N-1);
+    // status |= check_dimension("Lower input bounds (u_max)", "rows", u_max.rows(), nu);
+    // status |= check_dimension("Lower input bounds (u_max)", "cols", u_max.cols(), N-1);
     
     work->x = tinyMatrix::Zero(nx, N);
     work->u = tinyMatrix::Zero(nu, N-1);
@@ -236,8 +236,8 @@ int tiny_set_x_ref(TinySolver* solver, tinyMatrix x_ref) {
         return 1;
     }
     int status = 0;
-    status |= check_dimension("State reference trajectory (x_ref)", "rows", x_ref.rows(), solver->work->nx);
-    status |= check_dimension("State reference trajectory (x_ref)", "columns", x_ref.cols(), solver->work->N);
+    // status |= check_dimension("State reference trajectory (x_ref)", "rows", x_ref.rows(), solver->work->nx);
+    // status |= check_dimension("State reference trajectory (x_ref)", "columns", x_ref.cols(), solver->work->N);
     solver->work->Xref = x_ref;
     return 0;
 }
@@ -248,8 +248,8 @@ int tiny_set_u_ref(TinySolver* solver, tinyMatrix u_ref) {
         return 1;
     }
     int status = 0;
-    status |= check_dimension("Control/input reference trajectory (u_ref)", "rows", u_ref.rows(), solver->work->nu);
-    status |= check_dimension("Control/input reference trajectory (u_ref)", "columns",u_ref.cols(), solver->work->N-1);
+    // status |= check_dimension("Control/input reference trajectory (u_ref)", "rows", u_ref.rows(), solver->work->nu);
+    // status |= check_dimension("Control/input reference trajectory (u_ref)", "columns",u_ref.cols(), solver->work->N-1);
     solver->work->Uref = u_ref;
     return 0;
 }
