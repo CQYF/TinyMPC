@@ -1,7 +1,7 @@
 #pragma once
 
 
-#include <Eigen.h>
+#include <ArduinoEigen.h>
 // #include <Eigen/Core>
 // #include <Eigen/LU>
 
